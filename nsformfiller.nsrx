@@ -1,0 +1,38 @@
+/* nsformfiller.nsrx
+ * Simple form filler for NetSurf (Amiga) by Chris Young
+ *
+ * Usage:
+ *
+ * Copy this file to NetSurf's Rexx directory.
+ *
+ * Create a file ENVARC:nsformfiller.db containing multiple lines:
+ * URL ID VALUE
+ * Where;
+ * URL is the URL of the page returned by GETURL
+ * ID is the id value of the input element on the page
+ * VALUE is the value to be filled in
+ *
+ * You can specify multiple lines with the same URL and different fields.
+ * This is a very simple POC and spaces are not supported!
+ */
+
+options results
+address netsurf
+
+geturl
+url = result
+
+if open('db','ENVARC:nsformfiller.db','R') then do
+  do until eof('db')
+    db = readln('db')
+
+    if word(db,1) = url then do
+    	id = word(db,2)
+    	value = word(db,3)
+    	
+    	js = "document.getElementById('" || id || "').value = '" || value || "';"
+    	exec js
+    end        
+  end
+  dummy = close('db')
+end
