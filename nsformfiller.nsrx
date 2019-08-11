@@ -1,10 +1,11 @@
 /* nsformfiller.nsrx
  * Simple form filler for NetSurf (Amiga) by Chris Young
+ * Requires CI build 4821 or newer
  *
  * Usage:
  *
  * Copy this file to NetSurf's Rexx directory.
- *
+ * Add arexx_allow_exec:1 to your Choices file
  * Create a file ENVARC:nsformfiller.db containing multiple lines:
  * URL ID VALUE
  * Where;
@@ -14,6 +15,9 @@
  *
  * You can specify multiple lines with the same URL and different fields.
  * This is a very simple POC and spaces are not supported!
+ *
+ * Visit a page present in the file and select nsformfiller.nsrx
+ * from the ARexx menu to fill in the form.
  */
 
 options results
